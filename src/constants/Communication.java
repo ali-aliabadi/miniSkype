@@ -9,4 +9,7 @@ public interface Communication {
 
     void notificationListener();
 
+    void login();
+    void signup();
+
 }

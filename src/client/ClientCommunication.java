@@ -2,6 +2,7 @@ package client;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -13,9 +14,6 @@ import java.util.Scanner;
 public interface ClientCommunication {
 
 
-    void commandReader(Scanner jin, DataInputStream dataInputStream, DataOutputStream dataOutputStream);
-
-    void login(Scanner jin, DataInputStream dataInputStream, DataOutputStream dataOutputStream);
-    void signup(Scanner jin, DataInputStream dataInputStream, DataOutputStream dataOutputStream);
+    void commandReader() throws IOException;
 
 }
