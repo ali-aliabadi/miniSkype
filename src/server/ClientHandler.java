@@ -1,11 +1,13 @@
 package server;
 
+import constants.Communication;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class ClientHandler implements ClientHandlerCommunication {
+public class ClientHandler implements ClientHandlerCommunication, Communication {
 
     private Socket socket;
     private DataInputStream dataInputStream;
