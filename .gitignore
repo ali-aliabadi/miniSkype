@@ -328,7 +328,7 @@ $RECYCLE.BIN/
 
 
 # My own ignore cases
-idea
-idea/
+.idea
+.idea/
 
 # End of my own ignore cases

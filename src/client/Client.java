@@ -9,38 +9,29 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Client implements ClientCommunication, Communication {
+public class Client extends Thread implements ClientCommunication, Communication {
 
-    private Socket commandsSocket, notficationSocket;
-    private DataInputStream commandInput, notificationInput;
-    private DataOutputStream commandOutput, notificationOutput;
-    private Thread notifiListener, handelingCommands;
+    private Socket socket;
+    private DataInputStream dataInputStream;
+    private DataOutputStream dataOutputStream;
     private Scanner jin;
 
 
     Client(String address, int port) throws IOException {
 
-        commandsSocket = new Socket(address, port);
-        commandInput = new DataInputStream(commandsSocket.getInputStream());
-        commandOutput = new DataOutputStream(commandsSocket.getOutputStream());
-
-        notficationSocket = new Socket(address, port);
-        notificationInput = new DataInputStream(notficationSocket.getInputStream());
-        notificationOutput = new DataOutputStream(notficationSocket.getOutputStream());
+        socket = new Socket(address, port);
+        dataInputStream = new DataInputStream(socket.getInputStream());
+        dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
         jin = new Scanner(System.in);
 
-        Runnable r1 = this::notificationListener;
-        Runnable r2 = this::commandReader;
-        notifiListener = new Thread(r1);
-        handelingCommands = new Thread(r2);
-        notifiListener.start();
-        handelingCommands.start();
+        start();
     }
 
+    /* unused methods start*/
 
     @Override
-    public void notificationListener() {
+    public void commandReader() {
 
     }
 
@@ -54,30 +45,35 @@ public class Client implements ClientCommunication, Communication {
 
     }
 
+    /* unused methods end*/
+
     @Override
-    public void commandReader() {
+    public void run() {
 
         String command;
 
         while (true) {
-            System.out.println('*' * 33);
+            System.out.println('*' * Constants.STARS_NUM_SEP);
             System.out.print("please input your command : ");
             try {
-                commandOutput.writeUTF(jin.nextLine());
+                dataOutputStream.writeUTF(jin.nextLine());
             } catch (IOException e) {
                 System.err.println("error in sending command to server");
             }
             commandProcess:
             while (true) {
                 try {
-                    command = commandInput.readUTF();
+                    command = dataInputStream.readUTF();
 
                     switch (command) {
                         case Constants.NEED_INPUT:
-                            commandOutput.writeUTF(jin.nextLine());
+                            dataOutputStream.writeUTF(jin.nextLine());
                             break;
                         case Constants.END_OF_PROCESS:
                             break commandProcess;
+                        case Constants.NOTIFICATION:
+
+                            break;
                         default:
                             System.out.println(command);
                     }
@@ -88,4 +84,10 @@ public class Client implements ClientCommunication, Communication {
             }
         }
     }
+
+    @Override
+    public void notificationListener() {
+
+    }
+
 }
