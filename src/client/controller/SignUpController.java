@@ -1,4 +1,4 @@
-package controller;
+package client.controller;
 
 
 import com.mongodb.MongoClient;
@@ -8,8 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import model.Main;
-import model.PageLoader;
+import client.model.PageLoader;
 import org.bson.Document;
 
 import java.io.IOException;
@@ -53,7 +52,7 @@ public class SignUpController {
 
     @FXML
     void loadLoginPage() throws IOException {
-        new PageLoader().load("/view/Login.fxml");
+        new PageLoader().load("/client/view/Login.fxml");
     }
 
     @FXML
@@ -67,7 +66,7 @@ public class SignUpController {
             }
             if (! userIdInDB(usernameField.getText())) {
                 signUp(usernameField.getText(), pass1);
-                new PageLoader().load("/view/completeProfile.fxml");
+                new PageLoader().load("/client/view/completeProfile.fxml");
             } else {
                 usernameMatch.setVisible(true);
             }

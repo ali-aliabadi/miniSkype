@@ -1,4 +1,4 @@
-package controller;
+package client.controller;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -7,12 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import model.Main;
-import model.PageLoader;
+import client.model.PageLoader;
 import org.bson.Document;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -45,7 +43,7 @@ public class LoginController {
         if (doc != null) {
             if (doc.getString("password").equals(password)) {
                 loginUser(doc);
-                new PageLoader().load("/view/workPlace.fxml");
+                new PageLoader().load("/client/view/workPlace.fxml");
             } else {
                 // wrong password
                 alertMassage.setText("Wrong password");
@@ -72,7 +70,7 @@ public class LoginController {
 
     @FXML
     void loadSignUpPage() throws IOException {
-        new PageLoader().load("/view/signup_page.fxml");
+        new PageLoader().load("/client/view/signup_page.fxml");
     }
 
     @FXML
