@@ -70,7 +70,7 @@ public class LoginController {
 
     @FXML
     void loadSignUpPage() throws IOException {
-        new PageLoader().load("/client/view/signup_page.fxml");
+        new PageLoader().load("/client/view/home.fxml");
     }
 
     @FXML
