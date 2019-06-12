@@ -1,18 +1,13 @@
 package client.controller;
 
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import client.CommandsType;
+import client.Massage;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import client.model.PageLoader;
-import org.bson.Document;
-
-import java.io.IOException;
-
-import static com.mongodb.client.model.Filters.eq;
 
 public class LoginController {
 
@@ -23,60 +18,23 @@ public class LoginController {
     private PasswordField passwordText;
 
     @FXML
-    private TextField showPassText;
-
-    @FXML
-    private Text alertMassage;
-
-    @FXML
-    void enterWorkPlace() throws IOException {
-
-        String username = usernameText.getText();
+    void login() throws JsonProcessingException {
+        System.out.println("in login");
+        String userName = usernameText.getText();
         String password = passwordText.getText();
+        if (userName.replace("", "").equals("") || password.replace(" ", "").equals("")) {
 
-        MongoClient mongoClient = new MongoClient();
-        MongoDatabase database = mongoClient.getDatabase("miniTweeter");
-        MongoCollection<Document> collection = database.getCollection("Users");
-
-        Document doc = collection.find(eq("username", username)).first();
-
-        if (doc != null) {
-            if (doc.getString("password").equals(password)) {
-                loginUser(doc);
-                new PageLoader().load("/client/view/workPlace.fxml");
-            } else {
-                // wrong password
-                alertMassage.setText("Wrong password");
-                alertMassage.setVisible(true);
-            }
         } else {
-            // user does not exist
-            alertMassage.setText("User does not exist");
-            alertMassage.setVisible(true);
+            System.out.println("hi");
+            Massage msg = new Massage(CommandsType.LOGIN);
+            msg.setUsername(userName);
+            msg.setPassword(password);
+
+            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            String json = ow.writeValueAsString(msg);
+
+            System.out.println(json);
         }
-
     }
 
-    private void loginUser(Document doc) {
-
-    }
-
-    @FXML
-    void hidePass() {
-        passwordText.setVisible(true);
-        passwordText.setText(showPassText.getText());
-        showPassText.setVisible(false);
-    }
-
-    @FXML
-    void loadSignUpPage() throws IOException {
-        new PageLoader().load("/client/view/home.fxml");
-    }
-
-    @FXML
-    void showPass() {
-        showPassText.setVisible(true);
-        showPassText.setText(passwordText.getText());
-        passwordText.setVisible(false);
-    }
 }
