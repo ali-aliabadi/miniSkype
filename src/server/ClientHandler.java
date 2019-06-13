@@ -77,13 +77,13 @@ public class ClientHandler extends Thread {
         if(Connection.isDocumentInCollection("User", Constants.USERNAME, username)) {
             String userPass = (String) Connection.getValueOfADocumentInCollection("User", Constants.USERNAME, username, Constants.PASSWORD);
             if (password.equals(userPass)) {
-                result.put("wasSuccess", true);
+                result.put(Constants.WASSUCCESS, true);
             } else {
-                result.put("wasSuccess", false);
+                result.put(Constants.WASSUCCESS, false);
                 result.put(Constants.DESCRIPTION, "Wrong Password");
             }
         } else {
-            result.put("wasSuccess", false);
+            result.put(Constants.WASSUCCESS, false);
             result.put(Constants.DESCRIPTION, "User not Existed");
         }
 

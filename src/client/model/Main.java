@@ -1,7 +1,10 @@
 package client.model;
 
+import client.Connection;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class Main extends Application {
@@ -13,7 +16,8 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        Connection connection = new Connection("localhost", 8888);
         launch(args);
     }
 }
