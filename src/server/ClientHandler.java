@@ -83,7 +83,7 @@ public class ClientHandler extends Thread {
                 result.put(Constants.DESCRIPTION, "Wrong Password");
             }
         } else {
-            result.put("wasSuccess", true);
+            result.put("wasSuccess", false);
             result.put(Constants.DESCRIPTION, "User not Existed");
         }
 
