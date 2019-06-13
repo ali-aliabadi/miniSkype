@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.LoginController">
+<Pane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.SignUpController">
     <children>
         <VBox prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #00aff0;">
             <children>
@@ -31,7 +31,7 @@
                 </HBox>
                 <VBox alignment="CENTER" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #ffffff;">
                     <children>
-                        <Text fill="#16172e" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-fill: #16172e;" text="Sign in">
+                        <Text fill="#16172e" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-fill: #16172e;" text="Sign up">
                             <font>
                                 <Font size="50.0" />
                             </font>
@@ -44,30 +44,30 @@
                         <Insets right="190.0" />
                      </VBox.margin>
                   </Label>
-                        <HBox alignment="CENTER" prefHeight="20.0" prefWidth="700.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="700.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
                             <children>
                                 <TextField fx:id="usernameText" prefHeight="13.0" prefWidth="256.0" promptText="Username" style="-fx-background-color: transparent; -fx-font-size: 15;">
                                 </TextField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../res/username.png" />
+                              <Image url="file:/C:/Users/Mrs%20sharbatdar/IdeaProjects/miniSkype/res/username.png" />
                            </image>
                         </ImageView>
                             </children>
                             <VBox.margin>
-                                <Insets bottom="20.0" left="200.0" right="200.0" top="20.0" />
+                                <Insets left="200.0" right="200.0" top="20.0" />
                             </VBox.margin>
                      <padding>
                         <Insets bottom="5.0" />
                      </padding>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="35.0" prefWidth="700.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="700.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
                             <children>
-                                <PasswordField fx:id="passwordText" prefHeight="25.0" prefWidth="600.0" promptText="Password" style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER">
+                                <PasswordField fx:id="passwordText" prefHeight="25.0" prefWidth="600.0" promptText=" Password" style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER">
                                 </PasswordField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../res/pass.png" />
+                              <Image url="file:/C:/Users/Mrs%20sharbatdar/IdeaProjects/miniSkype/res/pass.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="5.0" />
@@ -75,28 +75,34 @@
                         </ImageView>
                             </children>
                             <VBox.margin>
-                                <Insets bottom="10.0" left="200.0" right="200.0" />
+                                <Insets left="200.0" right="200.0" top="10.0" />
                             </VBox.margin>
                         </HBox>
                   <HBox prefHeight="30.0" prefWidth="700.0">
                      <children>
-                        <Label text="No account?">
+                        <HBox alignment="CENTER" prefHeight="33.0" prefWidth="300.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
+                           <children>
+                              <PasswordField fx:id="passwordText1" prefHeight="13.0" prefWidth="256.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER" />
+                              <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:/C:/Users/Mrs%20sharbatdar/IdeaProjects/miniSkype/res/pass.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
                            <HBox.margin>
-                              <Insets left="200.0" top="4.0" />
+                              <Insets left="200.0" top="10.0" />
                            </HBox.margin>
-                        </Label>
-                        <Button mnemonicParsing="false" style="-fx-background-color: null;" text="Create one!" textFill="#0900ff" underline="true">
-                           <HBox.margin>
-                              <Insets right="30.0" />
-                           </HBox.margin>
-                        </Button>
+                        </HBox>
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Button mnemonicParsing="false" text="Back">
                            <HBox.margin>
-                              <Insets left="270.0" right="10.0" top="13.0" />
+                              <Insets left="270.0" right="10.0" top="20.0" />
                            </HBox.margin>
                            <padding>
                               <Insets bottom="5.0" left="40.0" right="40.0" top="5.0" />
@@ -105,12 +111,12 @@
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: rgb(48,90,148);" text="Sign in" textFill="#fffefe">
+                        <Button mnemonicParsing="false" style="-fx-background-color: rgb(48,90,148);" text="Sign up" textFill="#fffefe">
                            <padding>
                               <Insets bottom="5.0" left="40.0" right="40.0" top="5.0" />
                            </padding>
                            <HBox.margin>
-                              <Insets top="13.0" />
+                              <Insets top="20.0" />
                            </HBox.margin>
                            <font>
                               <Font size="15.0" />

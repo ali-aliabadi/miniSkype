@@ -9,13 +9,13 @@ import java.io.IOException;
 
 public class PageLoader {
     private static final int WIDTH = 700;
-    public static final int HEIGHT = 487;
+    public static final int HEIGHT = 450;
     private static Stage stage;
 
     public static void intiStage(Stage primarySrage) {
         stage = primarySrage;
-        stage.setTitle("Mini Tweeter");
-        stage.setResizable(false);
+        stage.setTitle("Skype");
+        stage.setResizable(true);
         stage.setWidth(WIDTH);
         stage.setHeight(HEIGHT);
     }

@@ -5,53 +5,34 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import org.bson.Document;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
+import java.util.ArrayList;
 
 public class Test {
 
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) throws IOException {
 
-        /**
-         * fields must be private.
-         *
-         */
+        Socket socket = new Socket("localhost", 8888);
+        DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 
-        Massage msg = new Massage(false, "Login", 13, CommandsType.Login);
-        msg.getTestArrayListOfLonges().add(31L);
-        msg.getTestArrayListOfLonges().add(-5432L);
-        msg.getTestArrayListOfLonges().add(98766L);
+        ArrayList<Double> aa = new ArrayList<>();
+        aa.add(1.6);
+        aa.add(-134.3452);
+        aa.add(745.743345);
 
-        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String json = ow.writeValueAsString(msg);
+        Document doc = new Document();
+        doc.put("type", "login");
+        doc.put("int test", 7);
+        doc.put("array", aa);
 
-        System.out.println(json);
+        String result = doc.toJson();
+        dos.writeUTF(result);
+        dos.flush();
 
-        ////////////////////////////////////////    now reverse    /////////////////////////////////////////////////
-
-        /**
-         * class must have default constractor
-         */
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-
-            // Convert JSON string from file to Object
-            Massage user = mapper.readValue(json, Massage.class);
-            System.out.println(user.getTestArrayListOfLonges());
-            System.out.println(user.getCommand());
-            System.out.println(user.getCommandType());
-            System.out.println(user.getTestInt());
-            System.out.println(user.getTestString());
-
-        } catch (JsonGenerationException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

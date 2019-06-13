@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Server {
 
     private ServerSocket serverSocket;
-    private ArrayList<ClientHandler> clientHandlers;
+    private ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 
     Server(int port) throws IOException {
         serverSocket = new ServerSocket(port);

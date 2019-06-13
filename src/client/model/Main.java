@@ -9,7 +9,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         PageLoader.intiStage(primaryStage);
-        new PageLoader().load("/client/view/Login.fxml");
+        new PageLoader().load("/client/view/home.fxml");
     }
 
 
