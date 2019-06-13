@@ -1,5 +1,6 @@
 package server;
 
+import constants.Constants;
 import org.bson.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -36,18 +37,38 @@ public class ClientHandler extends Thread {
         while (true) {
             try {
                 command = scan.readUTF();
-
-
                 Document doc = Document.parse(command);
-                System.out.println(doc);
-                System.out.println(doc.toJson());
+                command = doc.getString(Constants.TYPE);
+
+                switch(command) {
+                    case Constants.CHATMASSAGE:
+
+                        break;
+                    case Constants.LOGINREQUEST:
+                        login(doc);
+                        break;
+                    case Constants.SIGNUPREQUEST:
+
+                        break;
+                    case Constants.NOTIFICATION:
+
+                        break;
+                    default:
+
+                        break;
+                }
 
                 break;
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.gc();
         }
+    }
+
+    private void login(Document doc) {
+
     }
 
 }
