@@ -10,8 +10,8 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class Connection {
 
-    MongoClient mongoClient;
-    MongoDatabase mongoDatabase;
+    static MongoClient mongoClient;
+    static MongoDatabase mongoDatabase;
 
 
     Connection() {
@@ -19,7 +19,7 @@ public class Connection {
         mongoDatabase = mongoClient.getDatabase("miniSkype");
     }
 
-    MongoCollection<Document> getCollection(String collectionName) {
+    static MongoCollection<Document> getCollection(String collectionName) {
         return mongoDatabase.getCollection(collectionName);
     }
 
@@ -29,7 +29,7 @@ public class Connection {
      * @param value value of that specific key that you gave (previous parameter)
      * @return first document with this specific key value pair given.
      */
-    Document getFirstDocument(String collectionName, String key, String value) {
+    static Document getFirstDocument(String collectionName, String key, String value) {
         return mongoDatabase.getCollection(collectionName).find(eq(key, value)).first();
     }
 
@@ -44,12 +44,16 @@ public class Connection {
      *              }
      *          </code>
      */
-    FindIterable<Document> getAllDocuments(String collectionName, String key, String value) {
+    static FindIterable<Document> getAllDocuments(String collectionName, String key, String value) {
         return mongoDatabase.getCollection(collectionName).find(eq(key, value)).skip(0);
     }
 
-    boolean isDocumentInCollection(String collectionName, String key, String value) {
+    static boolean isDocumentInCollection(String collectionName, String key, String value) {
         return mongoDatabase.getCollection(collectionName).find(eq(key, value)).first() != null;
     }
-    
+
+    static Object getValueOfADocumentInCollection(String collectionName, String specificKey, String speceficValue, String key) {
+        return mongoDatabase.getCollection(collectionName).find(eq(specificKey, speceficValue)).first().get(key);
+    }
+
 }

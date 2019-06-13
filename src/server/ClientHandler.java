@@ -68,7 +68,31 @@ public class ClientHandler extends Thread {
     }
 
     private void login(Document doc) {
+        String username = doc.getString(Constants.USERNAME);
+        String password = doc.getString(Constants.PASSWORD);
 
+        Document result = new Document();
+        result.put(Constants.TYPE, Constants.LOGINREQUEST);
+
+        if(Connection.isDocumentInCollection("User", Constants.USERNAME, username)) {
+            String userPass = (String) Connection.getValueOfADocumentInCollection("User", Constants.USERNAME, username, Constants.PASSWORD);
+            if (password.equals(userPass)) {
+                result.put("wasSuccess", true);
+            } else {
+                result.put("wasSuccess", false);
+                result.put(Constants.DESCRIPTION, "Wrong Password");
+            }
+        } else {
+            result.put("wasSuccess", true);
+            result.put(Constants.DESCRIPTION, "User not Existed");
+        }
+
+        try {
+            print.writeUTF(result.toJson());
+            print.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
