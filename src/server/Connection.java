@@ -56,4 +56,16 @@ public class Connection {
         return mongoDatabase.getCollection(collectionName).find(eq(specificKey, speceficValue)).first().get(key);
     }
 
+    /**
+     * @param collectionName name of collection
+     * @param doc the document contain all elements that we want to add to a specific collection
+     *            for example for signUp document contain of a username and a password
+     */
+    static void addADocument(String collectionName, Document doc) {
+        mongoDatabase.getCollection(collectionName).insertOne(doc);
+    }
+
+    static void updateADocument(String collectionName, String specificKey, String specificValue, Document doc) {
+        mongoDatabase.getCollection(collectionName).updateOne(new Document().append(specificKey, specificValue), new Document().append("$set", doc));
+    }
 }

@@ -11,5 +11,7 @@ public class Constants {
     public static final String PASSWORD = "password";
     public static final String DESCRIPTION = "description";
     public static final String WASSUCCESS = "wasSuccess";
+    public static final String TOUSER = "toUser";
+    public static final String COMPLETEPROFILE = "completeProfile";
 
 }
