@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #00aff0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.HomeController">
+<Pane prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #00aff0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.HomeController">
    <children>
       <VBox prefHeight="450.0" prefWidth="700.0">
          <children>
@@ -18,7 +18,7 @@
                   <Insets left="240.0" top="50.0" />
                </VBox.margin>
                <image>
-                  <Image url="file:/C:/Users/Mrs%20sharbatdar/IdeaProjects/miniSkype/res/SkypeMainLogo.png" />
+                  <Image url="@../../../../../res/SkypeMainLogo.png" />
                </image>
             </ImageView>
             <Label text="Let's get started" textFill="WHITE">

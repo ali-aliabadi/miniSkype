@@ -41,7 +41,7 @@ public class LoginController {
                 if (result.getBoolean(Constants.WASSUCCESS)) {
                     new PageLoader().load("/view/workPlace.fxml");
                 } else {
-                    errorAlert("Error creating user", result.getString(Constants.DESCRIPTION));
+                    errorAlert("Error in user authentication", result.getString(Constants.DESCRIPTION));
                 }
             }
         }

@@ -21,7 +21,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:/C:/Users/Mrs%20sharbatdar/IdeaProjects/miniSkype/res/skypeLogo.png" />
+                        <Image url="@../../../../../res/skypeLogo.png" />
                      </image>
                      <HBox.margin>
                         <Insets right="312.0" />
@@ -50,7 +50,7 @@
                                 </TextField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../res/username.png" />
+                              <Image url="@../../../../../res/username.png" />
                            </image>
                         </ImageView>
                             </children>
@@ -67,7 +67,7 @@
                                 </PasswordField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../res/pass.png" />
+                              <Image url="@../../../../../res/pass.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="5.0" />

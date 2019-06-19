@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.SignUpController">
+<Pane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.SignUpController">
     <children>
         <VBox prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #00aff0;">
             <children>
@@ -21,7 +21,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:/C:/Users/Mrs%20sharbatdar/IdeaProjects/miniSkype/res/skypeLogo.png" />
+                        <Image url="@../../../../../res/skypeLogo.png" />
                      </image>
                      <HBox.margin>
                         <Insets right="312.0" />
@@ -31,18 +31,21 @@
                 </HBox>
                 <VBox alignment="CENTER" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #ffffff;">
                     <children>
-                        <Text fill="#16172e" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-fill: #16172e;" text="Sign up">
+                        <Text fill="#16172e" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #16172e;" text="ثبت نام" textAlignment="RIGHT">
                             <font>
-                                <Font size="50.0" />
+                                <Font name="B Koodak Bold" size="50.0" />
                             </font>
                      <VBox.margin>
-                        <Insets right="200.0" />
+                        <Insets />
                      </VBox.margin>
                         </Text>
-                  <Label text="to continue to Skype">
+                  <Label text="برای ادامه به اسکایپ" textAlignment="RIGHT">
                      <VBox.margin>
-                        <Insets right="190.0" />
+                        <Insets left="177.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="B Koodak Bold" size="15.0" />
+                     </font>
                   </Label>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="700.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
                             <children>
@@ -50,7 +53,7 @@
                                 </TextField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="file:/C:/Users/Mrs%20sharbatdar/IdeaProjects/miniSkype/res/username.png" />
+                              <Image url="@../../../../../res/username.png" />
                            </image>
                         </ImageView>
                             </children>
@@ -67,7 +70,7 @@
                                 </PasswordField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="file:/C:/Users/Mrs%20sharbatdar/IdeaProjects/miniSkype/res/pass.png" />
+                              <Image url="@../../../../../res/pass.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="5.0" />
@@ -85,7 +88,7 @@
                               <PasswordField fx:id="passwordText1" prefHeight="13.0" prefWidth="256.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER" />
                               <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="file:/C:/Users/Mrs%20sharbatdar/IdeaProjects/miniSkype/res/pass.png" />
+                                    <Image url="@../../../../../res/pass.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets right="5.0" />
@@ -100,26 +103,26 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Back">
+                        <Button mnemonicParsing="false" text="برگشت" textAlignment="CENTER">
                            <HBox.margin>
-                              <Insets left="270.0" right="10.0" top="20.0" />
+                              <Insets left="200.0" right="55.0" top="40.0" />
                            </HBox.margin>
                            <padding>
                               <Insets bottom="5.0" left="40.0" right="40.0" top="5.0" />
                            </padding>
                            <font>
-                              <Font size="15.0" />
+                              <Font name="B Koodak Bold" size="17.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: rgb(48,90,148);" text="Sign up" textFill="#fffefe">
+                        <Button mnemonicParsing="false" style="-fx-background-color: rgb(48,90,148);" text="ثبت نام" textAlignment="CENTER" textFill="#fffefe">
                            <padding>
                               <Insets bottom="5.0" left="40.0" right="40.0" top="5.0" />
                            </padding>
                            <HBox.margin>
-                              <Insets top="20.0" />
+                              <Insets top="40.0" />
                            </HBox.margin>
                            <font>
-                              <Font size="15.0" />
+                              <Font name="B Koodak Bold" size="17.0" />
                            </font>
                         </Button>
                      </children>

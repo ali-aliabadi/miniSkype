@@ -17,7 +17,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) throws IOException {
-        Connection connection = new Connection("localhost", 8888);
+//        Connection connection = new Connection("localhost", 8888);
         launch(args);
     }
 }
