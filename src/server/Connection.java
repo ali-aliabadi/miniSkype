@@ -39,13 +39,13 @@ public class Connection {
      * @param value value of that specific key that you gave (previous parameter)
      * @return all documents with this specific key value pair given.
      *          use this class like : <code>
-     *              for(Document doc : getAllDocuments) {
+     *              for(Document doc : getAllDocuments()) {
      *                  // working with docs one by one
      *              }
      *          </code>
      */
     static FindIterable<Document> getAllDocuments(String collectionName, String key, String value) {
-        return mongoDatabase.getCollection(collectionName).find(eq(key, value)).skip(0);
+        return mongoDatabase.getCollection(collectionName).find(eq(key, value));
     }
 
     static boolean isDocumentInCollection(String collectionName, String key, String value) {
@@ -65,6 +65,16 @@ public class Connection {
         mongoDatabase.getCollection(collectionName).insertOne(doc);
     }
 
+    /**
+     *
+     * @param collectionName
+     * @param specificKey
+     * @param specificValue
+     * @param doc
+     *
+     *  age ye document ro update konim kolle document hazf mishe va doc jadid miad jaye oon vali age biaym mesle paeen
+     *  avval "$set" bezanim document be doc to mongo ezafe mishe
+     */
     static void updateADocument(String collectionName, String specificKey, String specificValue, Document doc) {
         mongoDatabase.getCollection(collectionName).updateOne(new Document().append(specificKey, specificValue), new Document().append("$set", doc));
     }

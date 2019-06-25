@@ -5,11 +5,15 @@ import client.model.PageLoader;
 import constants.Constants;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.bson.Document;
 
 import java.io.IOException;
+import java.net.ConnectException;
+
+import static client.controller.UsefulFunctions.errorAlert;
 
 public class LoginController {
 
@@ -18,6 +22,10 @@ public class LoginController {
 
     @FXML
     private PasswordField passwordText;
+
+    @FXML
+    private Label passLabel;
+
 
     @FXML
     void login() throws IOException {
@@ -47,12 +55,70 @@ public class LoginController {
         }
     }
 
-    void errorAlert(String title, String contentText) {
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setTitle(title);
-        a.setHeaderText(null);
-        a.setContentText(contentText);
-        a.show();
+    @FXML
+    void hidePass() {
+        passLabel.setVisible(false);
+        passwordText.setVisible(true);
+    }
+
+    @FXML
+    void showPass() {
+
+        passLabel.setText(passwordText.getText());
+        passLabel.setVisible(true);
+        passwordText.setVisible(false);
+    }
+
+    @FXML
+    void signUp() {
+        try {
+            new PageLoader().load("/client/view/Signup.fxml");
+        } catch (IOException e) {
+            System.err.println("error loading signup page");
+        }
+    }
+
+    @FXML
+    void backHome() {
+        try {
+            new PageLoader().load("/client/view/home.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @FXML
+    void signIn() {
+        String username = usernameText.getText();
+        String password = passwordText.getText();
+
+        Document doc = new Document();
+        doc.append(Constants.TYPE, Constants.LOGINREQUEST);
+        doc.append(Constants.USERNAME, username);
+        doc.append(Constants.PASSWORD, password);
+
+        System.out.println(doc.toJson());
+
+        try {
+            Connection.print.writeUTF(doc.toJson());
+            Connection.print.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document result = null;
+        try {
+            String resultInJson = Connection.scan.readUTF();
+            result = Document.parse(resultInJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (result.get(Constants.WASSUCCESS).equals(true)) {
+
+        } else {
+            errorAlert("loginError",result.getString(Constants.DESCRIPTION));
+        }
     }
 
 }

@@ -70,7 +70,7 @@ public class ClientHandler extends Thread {
         String username = doc.getString(Constants.USERNAME);
         doc.remove(Constants.USERNAME);
 
-        Connection.updateADocument("User", Constants.USERNAME, username);
+        Connection.updateADocument("User", Constants.USERNAME, username, doc);
     }
 
     private void newMassage(Document doc) { // how to save chats ???!!!
