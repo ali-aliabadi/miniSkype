@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.SignUpController">
+<Pane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.SignUpController">
     <children>
       <Label fx:id="passLabel" layoutX="212.0" layoutY="350.0" text="Label" visible="false" />
         <VBox prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #00aff0;">
@@ -22,7 +22,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../res/skypeLogo.png" />
+                        <Image url="file:/home/ali/Projects/miniSkype/res/skypeLogo.png" />
                      </image>
                      <HBox.margin>
                         <Insets right="312.0" />
@@ -30,7 +30,7 @@
                   </ImageView>
                </children>
                 </HBox>
-                <VBox alignment="CENTER" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #ffffff;">
+                <VBox alignment="CENTER" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #eee;">
                     <children>
                         <Text fill="#16172e" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #16172e;" text="ثبت نام" textAlignment="RIGHT">
                             <font>
@@ -56,7 +56,7 @@
                            </HBox.margin></TextField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../res/username.png" />
+                              <Image url="file:/home/ali/Projects/miniSkype/res/username.png" />
                            </image>
                         </ImageView>
                             </children>
@@ -69,11 +69,11 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="700.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
                             <children>
-                                <PasswordField fx:id="passwordText" prefHeight="25.0" prefWidth="600.0" promptText="گذرواژه" style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER">
+                                <PasswordField fx:id="passwordText" prefHeight="25.0" prefWidth="600.0" promptText="گذرواژه " style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER">
                                 </PasswordField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" onMousePressed="#showPass" onMouseReleased="#hidePass" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../res/pass.png" />
+                              <Image url="file:/home/ali/Projects/miniSkype/res/pass.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="5.0" />
@@ -91,10 +91,10 @@
                               <PasswordField fx:id="passwordText1" prefHeight="13.0" prefWidth="256.0" promptText="تکرار گذرواژه" style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER" />
                               <ImageView fitHeight="150.0" fitWidth="30.0" onMousePressed="#showConfirmPass" onMouseReleased="#hideConfirmPass" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../res/pass.png" />
+                                    <Image url="file:/home/ali/Projects/miniSkype/res/pass.png" />
                                  </image>
                                  <HBox.margin>
-                                    <Insets right="5.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </ImageView>
                            </children>

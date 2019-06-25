@@ -15,26 +15,26 @@
          <children>
             <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
-                  <Insets left="240.0" top="50.0" />
+                  <Insets left="230.0" top="50.0" />
                </VBox.margin>
                <image>
-                  <Image url="@../../../../../res/SkypeMainLogo.png" />
+                  <Image url="file:/home/ali/Projects/miniSkype/res/SkypeMainLogo.png" />
                </image>
             </ImageView>
-            <Label text="Let's get started" textFill="WHITE">
+            <Label text="بزن بریم">
                <VBox.margin>
-                  <Insets left="255.0" top="30.0" />
+                  <Insets left="280.0" top="30.0" />
                </VBox.margin>
                <font>
-                  <Font size="28.0" />
+                  <Font name="B Koodak Bold" size="35.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#goToLoginPage" style="-fx-background-radius: 50; -fx-background-color: #ffffff;" text="Sign in or create">
+            <Button mnemonicParsing="false" onAction="#goToLoginPage" style="-fx-background-radius: 50; -fx-background-color: #ffffff;" text="ورود یا ساخت اکانت">
                <VBox.margin>
-                  <Insets bottom="100.0" left="257.0" top="15.0" />
+                  <Insets bottom="100.0" left="214.0" top="15.0" />
                </VBox.margin>
                <font>
-                  <Font size="15.0" />
+                  <Font size="19.0" />
                </font>
                <padding>
                   <Insets bottom="10.0" left="45.0" right="40.0" top="10.0" />
@@ -42,7 +42,7 @@
             </Button>
             <Label opacity="0.6" text="Programmed by Ali Aliabadi, Neshat Sharbatdar">
                <VBox.margin>
-                  <Insets left="225.0" />
+                  <Insets left="190.0" />
                </VBox.margin>
             </Label>
          </children>

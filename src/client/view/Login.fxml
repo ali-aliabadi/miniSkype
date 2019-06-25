@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.LoginController">
+<Pane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.LoginController">
     <children>
         <VBox prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #00aff0;">
             <children>
@@ -21,7 +21,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../res/skypeLogo.png" />
+                        <Image url="@../../../res/skypeLogo.png" />
                      </image>
                      <HBox.margin>
                         <Insets right="312.0" />
@@ -29,20 +29,23 @@
                   </ImageView>
                </children>
                 </HBox>
-                <VBox alignment="CENTER" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #ffffff;">
+                <VBox alignment="CENTER" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #ffffff; -fx-background-color: #ddd;">
                     <children>
-                        <Text fill="#16172e" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 30; -fx-fill: #16172e;" text="Sign in">
+                        <Text fill="#16172e" strokeType="OUTSIDE" strokeWidth="0.0" text="ورود">
                             <font>
-                                <Font size="50.0" />
+                                <Font name="B Koodak Bold" size="50.0" />
                             </font>
                      <VBox.margin>
                         <Insets right="200.0" />
                      </VBox.margin>
                         </Text>
-                  <Label text="to continue to Skype">
+                  <Label text="برای ادامه به اسکایپ">
                      <VBox.margin>
-                        <Insets right="190.0" />
+                        <Insets right="177.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="B Koodak Bold" size="15.0" />
+                     </font>
                   </Label>
                         <HBox alignment="CENTER" prefHeight="20.0" prefWidth="700.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
                             <children>
@@ -50,7 +53,7 @@
                                 </TextField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../res/username.png" />
+                              <Image url="@../../../res/username.png" />
                            </image>
                         </ImageView>
                             </children>
@@ -63,11 +66,11 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="35.0" prefWidth="700.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
                             <children>
-                                <PasswordField fx:id="passwordText" prefHeight="25.0" prefWidth="600.0" promptText="Password" style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER">
+                                <PasswordField fx:id="passwordText" prefHeight="25.0" prefWidth="600.0" promptText=" Password" style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER">
                                 </PasswordField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" onMousePressed="#showPass" onMouseReleased="#hidePass" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../res/pass.png" />
+                              <Image url="@../../../res/pass.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="5.0" />
@@ -80,21 +83,24 @@
                         </HBox>
                   <HBox prefHeight="30.0" prefWidth="700.0">
                      <children>
-                        <Label text="No account?">
-                           <HBox.margin>
-                              <Insets left="200.0" top="4.0" />
-                           </HBox.margin>
-                        </Label>
-                        <Button mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: null;" text="Create one!" textFill="#0900ff" underline="true">
-                           <HBox.margin>
-                              <Insets right="30.0" />
-                           </HBox.margin>
+                        <Button mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: null;" text="یکی بساز" textFill="#0900ff" underline="true">
+                           <font>
+                              <Font name="B Koodak Bold" size="15.0" />
+                           </font>
                         </Button>
+                        <Label text="اکانت ندارید ؟ ">
+                           <HBox.margin>
+                              <Insets top="4.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="B Koodak Bold" size="15.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#backHome" text="Back">
+                        <Button mnemonicParsing="false" onAction="#backHome" text="برگشت">
                            <HBox.margin>
                               <Insets left="270.0" right="10.0" top="13.0" />
                            </HBox.margin>
@@ -102,10 +108,10 @@
                               <Insets bottom="5.0" left="40.0" right="40.0" top="5.0" />
                            </padding>
                            <font>
-                              <Font size="15.0" />
+                              <Font name="B Koodak Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#signIn" style="-fx-background-color: rgb(48,90,148);" text="Sign in" textFill="#fffefe">
+                        <Button mnemonicParsing="false" onAction="#signIn" style="-fx-background-color: rgb(48,90,148);" text="ورود" textFill="#fffefe">
                            <padding>
                               <Insets bottom="5.0" left="40.0" right="40.0" top="5.0" />
                            </padding>
@@ -113,7 +119,7 @@
                               <Insets top="13.0" />
                            </HBox.margin>
                            <font>
-                              <Font size="15.0" />
+                              <Font name="B Koodak Bold" size="18.0" />
                            </font>
                         </Button>
                      </children>
