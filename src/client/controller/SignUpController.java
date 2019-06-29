@@ -72,30 +72,41 @@ public class SignUpController {
     void signUp() {
         String username = usernameText.getText();
         String password = passwordText.getText();
-        String confirmPassword = confirmPassLabel.getText();
+        String confirmPassword = passwordText1.getText();
+
+        Document doc = new Document();
+        doc.append(Constants.TYPE, Constants.SIGNUPREQUEST);
+        doc.append(Constants.USERNAME, username);
+        doc.append(Constants.PASSWORD, password);
 
         if(password.equals(confirmPassword)) {
-            Document doc = new Document();
-            doc.append(Constants.TYPE, Constants.SIGNUPREQUEST);
-            doc.append(Constants.USERNAME, username);
-            doc.append(Constants.PASSWORD, password);
-
-            Document result = null;
-            try {
-                Connection.print.writeUTF(doc.toJson());
-                Connection.print.flush();
-                result = Document.parse(Connection.scan.readUTF());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            if ((boolean) result.get(Constants.WASSUCCESS)) {
-
+            if (username.replace("", "").equals("") || password.replace(" ", "").equals("")) {
+                errorAlert("Error", "please fill the blanks first...");
             } else {
-                errorAlert("signUp error", result.getString(Constants.DESCRIPTION));
+
+                Document result = null;
+                try {
+                    Connection.print.writeUTF(doc.toJson());
+                    Connection.print.flush();
+                    result = Document.parse(Connection.scan.readUTF());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if ((boolean) result.get(Constants.WASSUCCESS)) {
+                    try {
+                        new PageLoader().load("/client/view/main.fxml");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    errorAlert("ارور ثبت نام", result.getString(Constants.DESCRIPTION));
+                }
             }
         } else {
-            errorAlert("signUp error", "password and confirm password didnt match");
+            errorAlert("ارور ثبت نام", "گذرواژه ها مطابفت ندارند");
+            System.out.println(password);
+            System.out.println(confirmPassword);
         }
     }
 

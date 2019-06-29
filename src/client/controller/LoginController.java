@@ -28,28 +28,31 @@ public class LoginController {
 
 
     @FXML
-    void login() throws IOException {
+    void signIn() throws IOException {
         String userName = usernameText.getText();
         String password = passwordText.getText();
 
         Document request = new Document();
-        request.put(Constants.TYPE, Constants.LOGINREQUEST);
-        request.put(Constants.USERNAME, userName);
-        request.put(Constants.PASSWORD, password);
+        request.append(Constants.TYPE, Constants.LOGINREQUEST);
+        request.append(Constants.USERNAME, userName);
+        request.append(Constants.PASSWORD, password);
 
         if (userName.replace("", "").equals("") || password.replace(" ", "").equals("")) {
-            errorAlert("Error", "please fill the blanks first...");
+            errorAlert("ارور", "ابتدا جا های خالی را کامل کنید");
         } else {
+
             Connection.print.writeUTF(request.toJson());
             Connection.print.flush();
 
-            Document result = Document.parse(Connection.scan.readUTF());
+            String resultJson = Connection.scan.readUTF();
+
+            Document result = Document.parse(resultJson);
 
             if (result.get(Constants.TYPE).equals(Constants.LOGINREQUEST)) {
                 if (result.getBoolean(Constants.WASSUCCESS)) {
-                    new PageLoader().load("/view/workPlace.fxml");
+                    new PageLoader().load("/client/view/main.fxml");
                 } else {
-                    errorAlert("Error in user authentication", result.getString(Constants.DESCRIPTION));
+                    errorAlert("ارور در وارد شدن", result.getString(Constants.DESCRIPTION));
                 }
             }
         }
@@ -88,37 +91,4 @@ public class LoginController {
 
 
     }
-
-    @FXML
-    void signIn() {
-        String username = usernameText.getText();
-        String password = passwordText.getText();
-
-        Document doc = new Document();
-        doc.append(Constants.TYPE, Constants.LOGINREQUEST);
-        doc.append(Constants.USERNAME, username);
-        doc.append(Constants.PASSWORD, password);
-
-        System.out.println(doc.toJson());
-
-        try {
-            Connection.print.writeUTF(doc.toJson());
-            Connection.print.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Document result = null;
-        try {
-            String resultInJson = Connection.scan.readUTF();
-            result = Document.parse(resultInJson);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (result.get(Constants.WASSUCCESS).equals(true)) {
-
-        } else {
-            errorAlert("loginError",result.getString(Constants.DESCRIPTION));
-        }
-    }
-
 }

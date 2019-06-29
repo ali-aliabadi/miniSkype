@@ -22,7 +22,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:/home/ali/Projects/miniSkype/res/skypeLogo.png" />
+                        <Image url="@../../../../../res/skypeLogo.png" />
                      </image>
                      <HBox.margin>
                         <Insets right="312.0" />
@@ -56,7 +56,7 @@
                            </HBox.margin></TextField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="file:/home/ali/Projects/miniSkype/res/username.png" />
+                              <Image url="@../../../../../res/username.png" />
                            </image>
                         </ImageView>
                             </children>
@@ -73,7 +73,7 @@
                                 </PasswordField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" onMousePressed="#showPass" onMouseReleased="#hidePass" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="file:/home/ali/Projects/miniSkype/res/pass.png" />
+                              <Image url="@../../../../../res/pass.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="5.0" />
@@ -84,25 +84,21 @@
                                 <Insets left="200.0" right="200.0" top="10.0" />
                             </VBox.margin>
                         </HBox>
-                  <HBox prefHeight="30.0" prefWidth="700.0">
+                  <HBox prefHeight="30.0" prefWidth="700.0" style="-fx-border-color: gray; -fx-border-width: 0px 0px 1.8px 0px;">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="33.0" prefWidth="300.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
-                           <children>
-                              <PasswordField fx:id="passwordText1" prefHeight="13.0" prefWidth="256.0" promptText="تکرار گذرواژه" style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER" />
-                              <ImageView fitHeight="150.0" fitWidth="30.0" onMousePressed="#showConfirmPass" onMouseReleased="#hideConfirmPass" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="file:/home/ali/Projects/miniSkype/res/pass.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
+                        <PasswordField fx:id="passwordText1" prefHeight="13.0" prefWidth="256.0" promptText="تکرار گذرواژه" style="-fx-background-color: transparent; -fx-font-size: 15;" />
+                        <ImageView fitHeight="150.0" fitWidth="30.0" onMousePressed="#showConfirmPass" onMouseReleased="#hideConfirmPass" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../res/pass.png" />
+                           </image>
                            <HBox.margin>
-                              <Insets left="200.0" top="10.0" />
+                              <Insets left="8.0" />
                            </HBox.margin>
-                        </HBox>
+                        </ImageView>
                      </children>
+                     <VBox.margin>
+                        <Insets left="200.0" right="200.0" top="10.0" />
+                     </VBox.margin>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>

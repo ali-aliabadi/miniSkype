@@ -21,7 +21,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../res/skypeLogo.png" />
+                        <Image url="@../../../../../res/skypeLogo.png" />
                      </image>
                      <HBox.margin>
                         <Insets right="312.0" />
@@ -36,12 +36,12 @@
                                 <Font name="B Koodak Bold" size="50.0" />
                             </font>
                      <VBox.margin>
-                        <Insets right="200.0" />
+                        <Insets />
                      </VBox.margin>
                         </Text>
                   <Label text="برای ادامه به اسکایپ">
                      <VBox.margin>
-                        <Insets right="177.0" />
+                        <Insets left="177.0" />
                      </VBox.margin>
                      <font>
                         <Font name="B Koodak Bold" size="15.0" />
@@ -49,11 +49,11 @@
                   </Label>
                         <HBox alignment="CENTER" prefHeight="20.0" prefWidth="700.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
                             <children>
-                                <TextField fx:id="usernameText" prefHeight="13.0" prefWidth="256.0" promptText="Username" style="-fx-background-color: transparent; -fx-font-size: 15;">
+                                <TextField fx:id="usernameText" prefHeight="13.0" prefWidth="256.0" promptText="نام کاربری" style="-fx-background-color: transparent; -fx-font-size: 15;">
                                 </TextField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../res/username.png" />
+                              <Image url="@../../../../../res/username.png" />
                            </image>
                         </ImageView>
                             </children>
@@ -66,11 +66,13 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="35.0" prefWidth="700.0" style="-fx-border-color: grey; -fx-border-width: 0px 0px 1.8px 0px;">
                             <children>
-                                <PasswordField fx:id="passwordText" prefHeight="25.0" prefWidth="600.0" promptText=" Password" style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER">
-                                </PasswordField>
+                                <PasswordField fx:id="passwordText" prefHeight="25.0" prefWidth="600.0" promptText="گذر واژه" style="-fx-background-color: transparent; -fx-font-size: 15;" HBox.hgrow="NEVER">
+                           <HBox.margin>
+                              <Insets left="3.0" />
+                           </HBox.margin></PasswordField>
                         <ImageView fitHeight="150.0" fitWidth="30.0" onMousePressed="#showPass" onMouseReleased="#hidePass" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../res/pass.png" />
+                              <Image url="@../../../../../res/pass.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="5.0" />
@@ -87,6 +89,9 @@
                            <font>
                               <Font name="B Koodak Bold" size="15.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets left="357.0" />
+                           </HBox.margin>
                         </Button>
                         <Label text="اکانت ندارید ؟ ">
                            <HBox.margin>
@@ -128,6 +133,6 @@
                 </VBox>
             </children>
         </VBox>
-      <Label fx:id="passLabel" layoutX="212.0" layoutY="250.0" visible="false" />
+      <Label fx:id="passLabel" layoutX="212.0" layoutY="260.0" visible="false" />
     </children>
 </Pane>

@@ -10,3 +10,7 @@ public class MiniSkype {
     }
 
 }
+
+/**
+ *  multiple user
+ */

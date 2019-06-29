@@ -1,5 +1,6 @@
 package server;
 
+import com.mongodb.client.MongoCollection;
 import constants.Constants;
 import org.bson.Document;
 import java.io.DataInputStream;
@@ -13,6 +14,7 @@ public class ClientHandler extends Thread {
     DataOutputStream print;
     DataInputStream scan;
     User user;
+    ClientHandler callCH;
 
     public ClientHandler(Socket client) {
         this.client=client;
@@ -34,7 +36,7 @@ public class ClientHandler extends Thread {
                 Document doc = Document.parse(command);
                 command = doc.getString(Constants.TYPE);
 
-                System.out.println(command);
+                doc.remove(Constants.TYPE);
 
                 switch(command) {
                     case Constants.CHATMASSAGE:
@@ -43,26 +45,198 @@ public class ClientHandler extends Thread {
                     case Constants.LOGINREQUEST:
                         login(doc);
                         break;
+                    case Constants.LOGOUT:
+                        logOut();
+                        break;
                     case Constants.SIGNUPREQUEST:
                         signUp(doc);
                         break;
                     case Constants.NOTIFICATION:
-
+                        newNotification(doc);
                         break;
                     case Constants.COMPLETEPROFILE:
                         completeProfile(doc);
                         break;
+                    case Constants.INITMAIN:
+                        initMain();
+                        break;
+                    case Constants.GETMESSAGES:
+                        getMessage(doc);
+                        break;
+                    case Constants.CALL:
+                        newCall(doc);
+                        break;
+                    case Constants.EXIT:
+                        exiting();
+                        break;
+                    case Constants.NOTIFICATIONANS:
+                        nofivationAnswer(doc);
+                        break;
                     default:
-
+                        System.err.println("\nbad type sending from client\n\t" + command + "\n");
                         break;
                 }
-
+            } catch (IOException e) {
+                e.printStackTrace();
                 break;
+            }
+            System.gc();
+        }
+    }
 
+    private void nofivationAnswer(Document doc) {
+        Document result = new Document();
+        if (doc.getString(Constants.ACCEPTED).equals(Constants.NO)) {
+            result.append(Constants.TYPE, Constants.NOTIFICATIONANS);
+            result.append(Constants.DESCRIPTION, "کاربر جواب نمی دهد");
+            synchronized (callCH.print) {
+                try {
+                    callCH.print.writeUTF(result.toJson());
+                    callCH.print.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            result.append(Constants.TYPE, Constants.CALL);
+            result.append(Constants.IP, "192.168.1.33");
+            result.append(Constants.PORT, 9000);
+            try {
+                print.writeUTF(result.toJson());
+                print.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.gc();
+            synchronized (callCH.print) {
+                try {
+                    callCH.print.writeUTF(result.toJson());
+                    callCH.print.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void newCall(Document doc) {
+        String touser = doc.getString(Constants.TOUSER);
+        synchronized (Server.clientHandlers) {
+            for (ClientHandler ch : Server.clientHandlers) {
+                if (ch.user.username.equals(touser)) {
+                    callCH = ch;
+                    sendNotification(user.username, ch);
+                    return;
+                }
+            }
+        }
+        Document result = new Document();
+        result.append(Constants.TYPE, Constants.NOTIFICATIONANS);
+        result.append(Constants.DESCRIPTION, "یوزر افلاین است");
+
+        try {
+            print.writeUTF(result.toJson());
+            print.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendNotification(String fromuser, ClientHandler touser) {
+        Document doc = new Document();
+        doc.append(Constants.TYPE, Constants.NOTIFICATION);
+        doc.append(Constants.FROMUSER, fromuser);
+        synchronized (touser.print) {
+            try {
+                touser.print.writeUTF(doc.toJson());
+                touser.print.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void logOut() {
+        this.user = null;
+    }
+
+    private void exiting() {
+        synchronized (Server.clientHandlers) {
+            Server.clientHandlers.remove(this);
+        }
+    }
+
+    private void newNotification(Document doc) {
+        String fromUserName = doc.getString(Constants.FROMUSER);
+        String toUser = doc.getString(Constants.TOUSER);
+
+        // sending notification to user if he is online.
+        synchronized (Server.clientHandlers) {
+            for (ClientHandler ch : Server.clientHandlers) {
+                if (toUser.equals(ch.user.username)) {
+                    doc.append(Constants.TYPE, Constants.NOTIFICATION);
+                    break;
+                }
+            }
+        }
+
+        // add this notification to mongo
+
+    }
+
+    private void getMessage(Document doc) {
+        String chatId = doc.getString(Constants.CHATID);
+        Document result = Connection.getFirstDocument(Constants.CHATS, Constants.CHATID, chatId);
+        result.append(Constants.TYPE, Constants.GETMESSAGES);
+        try {
+            print.writeUTF(result.toJson());
+        } catch (IOException e) {
+            System.out.println(result.toJson());
+            e.printStackTrace();
+        }
+    }
+
+    private void initMain() {
+        Document contactsResult = new Document();
+        Document profileResult = new Document();
+        Document chatsResult = new Document();
+
+        contactsResult.append(Constants.TYPE, Constants.CONTACTSRESULT);
+        MongoCollection<Document> col = Connection.getCollection("User");
+        int len = (int) (col.count() - 1);
+        contactsResult.append(Constants.NUMOFCONTACTS, String.valueOf(len));
+        int j = 0;
+        for(Document d : col.find()) {
+            if (! d.getString(Constants.USERNAME).equals(user.username)) {
+                contactsResult.append(String.valueOf(j ++), d.getString(Constants.USERNAME));
+            }
+        }
+
+        profileResult.append(Constants.TYPE, Constants.PROFILE);
+        profileResult.append(Constants.USERNAME, user.username);
+
+        chatsResult.append(Constants.TYPE, Constants.CHATRESULT);
+        len = user.chatsId.size();
+        chatsResult.append(Constants.NUMOFCHATS, String.valueOf(len));
+        for(int i = 0; i < len; i++) {
+            String str;
+            Document doc = Connection.getFirstDocument(Constants.CHATS, Constants.CHATID, user.chatsId.get(i));
+            if (doc.getString("user1").equals(user.username)) {
+                str = doc.getString("user2");
+            } else {
+                str = doc.getString("user1");
+            }
+            contactsResult.append(String.valueOf(i), user.chatsId.get(i) + '?' + str);
+        }
+
+        try {
+            print.writeUTF(contactsResult.toJson());
+            print.flush();
+            print.writeUTF(profileResult.toJson());
+            print.flush();
+            print.writeUTF(chatsResult.toJson());
+            print.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -83,19 +257,16 @@ public class ClientHandler extends Thread {
 
     private void signUp(Document doc) {
         Document result = new Document();
-        result.put(Constants.TYPE, Constants.SIGNUPREQUEST);
+        result.append(Constants.TYPE, Constants.SIGNUPREQUEST);
 
         String username = doc.getString(Constants.USERNAME);
-        String password = doc.getString(Constants.PASSWORD);
 
         if (Connection.isDocumentInCollection("User", Constants.USERNAME, username)) {
-            result.put(Constants.WASSUCCESS, false);
-            result.put(Constants.DESCRIPTION, "user already existed");
+            result.append(Constants.WASSUCCESS, false);
+            result.append(Constants.DESCRIPTION, "نام کاربری قبلا گرفته شده");
         } else {
-            doc.remove(Constants.TYPE);
             Connection.addADocument("User", doc);
-
-            result.put(Constants.WASSUCCESS, true);
+            result.append(Constants.WASSUCCESS, true);
         }
 
         try {
@@ -111,19 +282,20 @@ public class ClientHandler extends Thread {
         String password = doc.getString(Constants.PASSWORD);
 
         Document result = new Document();
-        result.put(Constants.TYPE, Constants.LOGINREQUEST);
+        result.append(Constants.TYPE, Constants.LOGINREQUEST);
 
         if(Connection.isDocumentInCollection("User", Constants.USERNAME, username)) {
             String userPass = (String) Connection.getValueOfADocumentInCollection("User", Constants.USERNAME, username, Constants.PASSWORD);
             if (password.equals(userPass)) {
-                result.put(Constants.WASSUCCESS, true);
+                result.append(Constants.WASSUCCESS, true);
+                setUser(username);
             } else {
-                result.put(Constants.WASSUCCESS, false);
-                result.put(Constants.DESCRIPTION, "Wrong Password");
+                result.append(Constants.WASSUCCESS, false);
+                result.append(Constants.DESCRIPTION, "پسورد اشتباه");
             }
         } else {
-            result.put(Constants.WASSUCCESS, false);
-            result.put(Constants.DESCRIPTION, "User not Existed");
+            result.append(Constants.WASSUCCESS, false);
+            result.append(Constants.DESCRIPTION, "کاربر وجود ندارد");
         }
 
         try {
@@ -132,6 +304,11 @@ public class ClientHandler extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setUser(String username) {
+        Document doc = Connection.getFirstDocument("User", Constants.USERNAME, username);
+        this.user = User.parse(doc);
     }
 
 }

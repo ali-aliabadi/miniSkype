@@ -78,4 +78,8 @@ public class Connection {
     static void updateADocument(String collectionName, String specificKey, String specificValue, Document doc) {
         mongoDatabase.getCollection(collectionName).updateOne(new Document().append(specificKey, specificValue), new Document().append("$set", doc));
     }
+
+    static void closeConnection() {
+        mongoClient.close();
+    }
 }
