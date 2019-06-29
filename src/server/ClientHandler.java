@@ -100,7 +100,7 @@ public class ClientHandler extends Thread {
         } else {
             result.append(Constants.TYPE, Constants.CALL);
             result.append(Constants.IP, "192.168.1.33");
-            result.append(Constants.PORT, 9000);
+            result.append(Constants.PORT, 12012);
             try {
                 print.writeUTF(result.toJson());
                 print.flush();

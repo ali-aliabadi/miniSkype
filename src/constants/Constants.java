@@ -36,5 +36,6 @@ public class Constants {
     public static final String CALL = "call";
     public static final String IP = "ip";
     public static final String PORT = "port";
+    public static final String VOICECALL = "voiceCall";
 
 }

@@ -13,7 +13,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.bson.Document;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.Optional;
 
 import static client.controller.UsefulFunctions.errorAlert;
@@ -155,7 +158,9 @@ public class MainController {
                     case Constants.CALL:
                         calling(message);
                         break;
-
+                    case Constants.VOICECALL:
+                        voiceCall(message);
+                        break;
                 }
             }
         } catch (IOException e) {
@@ -186,7 +191,6 @@ public class MainController {
         doc.append(Constants.TYPE, Constants.NOTIFICATIONANS);
         if (result.get() == buttonTypeOne) {
             doc.append(Constants.ACCEPTED, Constants.YES);
-            voiceCall();
         } else {
             doc.append(Constants.ACCEPTED, Constants.NO);
         }
@@ -199,7 +203,13 @@ public class MainController {
         }
     }
 
-    private void voiceCall() {
+    private void voiceCall(Document message) { //ip    //port
+        try {
+            Socket callSocket = new Socket(message.getString(Constants.IP), (Integer) message.get(Constants.PORT));
+            VoiceStream voiceStream = new VoiceStream(new DataInputStream(callSocket.getInputStream()), new DataOutputStream(callSocket.getOutputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
