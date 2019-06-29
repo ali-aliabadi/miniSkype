@@ -217,17 +217,11 @@ public class MainController {
         int len = Integer.parseInt(message.getString(Constants.NUMOFCHATS));
         for (int i = 0; i < len; i++) {
             String str = message.getString(String.valueOf(i));
-            HBox hBox = new HBox();
-//            ImageView imageView = new ImageView();
-//            imageView.setFitHeight(30);
-//            imageView.setFitWidth(30);
-//            imageView.setImage(new Image("res/ProfileLogo.png"));
-            Label label = new Label(str.substring(str.indexOf('?') + 1));
-            label.setFont(new Font(15));
-//            hBox.getChildren().add(imageView);
-            hBox.getChildren().add(label);
-//            HBox.setMargin(imageView, new Insets(15,10,10,10));
-            HBox.setMargin(label, new Insets(28, 0, 0, 15));
+            DialogPane dp = new DialogPane();
+            dp.setHeaderText(str);
+            dp.setContentText("  ");
+            dp.setPadding(new Insets(20, 10, 10, 20));
+            dp.setStyle("-fx-background-color :#ccc; -fx-border-width : 0px 0px 1px 0px; -fx-border-color : #aaa");
         }
     }
 
