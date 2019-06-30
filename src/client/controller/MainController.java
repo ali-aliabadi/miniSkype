@@ -203,6 +203,8 @@ public class MainController {
         try {
             Socket callSocket = new Socket(message.getString(Constants.IP), (Integer) message.get(Constants.PORT));
             VoiceStream voiceStream = new VoiceStream(new DataInputStream(callSocket.getInputStream()), new DataOutputStream(callSocket.getOutputStream()));
+//            Document doc = new Document();
+//            doc.append(Constants.TYPE, Constants.ADDCALL);
         } catch (IOException e) {
             e.printStackTrace();
         }

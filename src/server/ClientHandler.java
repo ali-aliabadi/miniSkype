@@ -267,6 +267,10 @@ public class ClientHandler extends Thread {
         } else {
             Connection.addADocument("User", doc);
             result.append(Constants.WASSUCCESS, true);
+            User u = new User();
+            u.username = doc.getString(Constants.USERNAME);
+            u.password = doc.getString(Constants.PASSWORD);
+            user = u;
         }
 
         try {
