@@ -3,6 +3,7 @@ package client.controller;
 import client.Connection;
 import client.model.PageLoader;
 import constants.Constants;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -123,12 +124,7 @@ public class MainController {
             e.printStackTrace();
         }
 
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                getMassage();
-            }
-        });
+        thread = new Thread(this::getMassage);
         thread.start();
 
         showProfile();
@@ -150,13 +146,13 @@ public class MainController {
                         addCall(message);
                         break;
                     case Constants.NOTIFICATION:
-                        newNotification(message);
+                        Platform.runLater(() -> newNotification(message));
                         break;
                     case Constants.NOTIFICATIONANS:
-                        errorAlert("مشکل در زنگ زدن", message.getString(Constants.DESCRIPTION));
+                        Platform.runLater(() -> errorAlert("مشکل در زنگ زدن", message.getString(Constants.DESCRIPTION)));
                         break;
                     case Constants.CALL:
-                        calling(message);
+                        Platform.runLater(() -> calling(message));
                         break;
                     case Constants.VOICECALL:
                         voiceCall(message);
